@@ -1,0 +1,72 @@
+/* Dark theme styles */
+body {
+    font-family: Arial, sans-serif;
+    background: #121212;
+    color: #ffffff;
+    margin: 0;
+    padding: 0;
+    text-align: center;
+}
+
+/* Header */
+header {
+    background: #1a1a1a;
+    padding: 15px;
+}
+
+header h1 {
+    margin: 0;
+    font-size: 24px;
+}
+
+nav ul {
+    list-style: none;
+    padding: 0;
+}
+
+nav ul li {
+    display: inline;
+    margin: 0 15px;
+}
+
+nav ul li a {
+    color: #ffcc00;
+    text-decoration: none;
+}
+
+/* Hero Section */
+#hero {
+    background: #333;
+    padding: 50px 20px;
+}
+
+.btn {
+    display: inline-block;
+    background: #ffcc00;
+    color: black;
+    padding: 10px 20px;
+    text-decoration: none;
+    margin-top: 10px;
+    border-radius: 5px;
+}
+
+/* Sections */
+section {
+    padding: 50px 20px;
+    background: #222;
+    margin: 10px 0;
+}
+
+/* Pricing */
+.pricing-box {
+    background: #333;
+    padding: 20px;
+    margin: 10px auto;
+    width: 80%;
+    border-radius: 8px;
+}
+
+footer {
+    background: #1a1a1a;
+    padding: 15px;
+}

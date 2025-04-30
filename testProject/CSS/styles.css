@@ -1,0 +1,311 @@
+/* General Styles */
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f4f4f9;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Header */
+header {
+  background-color: #4e73df;
+  color: white;
+  padding: 15px;
+  text-align: center;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+
+/* Navigation */
+.menu {
+  list-style: none;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+}
+
+.menu > li {
+  position: relative;
+  margin: 0 20px;
+}
+
+.menu a {
+  text-decoration: none;
+  color: white;
+  padding: 10px;
+  display: block;
+}
+
+.menu a:hover {
+  background-color: #2e59d9;
+  border-radius: 5px;
+}
+
+/* Dropdown Submenu */
+.submenu {
+  display: none;
+  position: absolute;
+  background-color: white;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+  list-style: none;
+  padding: 0;
+  top: 100%;
+  left: 0;
+  min-width: 180px;
+}
+
+.submenu li {
+  border-bottom: 1px solid #ddd;
+}
+
+.submenu li a {
+  color: black;
+  padding: 10px;
+  display: block;
+}
+
+.menu li:hover .submenu {
+  display: block;
+}
+
+/* Main Layout */
+.container {
+  display: flex;
+  width: 90%;
+  margin: 20px auto;
+  gap: 20px;
+}
+
+/* Main Content */
+main {
+  flex: 2;
+}
+
+/* Blog Post */
+.post {
+  background: white;
+  padding: 15px;
+  margin-bottom: 20px;
+  border-radius: 5px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.post img {
+  width: 100%;
+  height: auto;
+  border-radius: 5px;
+}
+
+.post a {
+  display: inline-block;
+  margin-top: 10px;
+  color: #4e73df;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.post a:hover {
+  text-decoration: underline;
+}
+
+/* Sidebar */
+.sidebar {
+  flex: 1;
+  background: white;
+  padding: 15px;
+  border-radius: 5px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.sidebar h3 {
+  border-bottom: 2px solid #4e73df;
+  padding-bottom: 5px;
+}
+
+/* Contact Form */
+.contact-form {
+  background: white;
+  padding: 15px;
+  margin: 20px auto;
+  width: 80%;
+  border-radius: 5px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.contact-form input,
+.contact-form textarea {
+  width: 100%;
+  padding: 10px;
+  margin: 10px 0;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.contact-form button {
+  background-color: #4e73df;
+  color: white;
+  border: none;
+  padding: 10px;
+  width: 100%;
+  border-radius: 5px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.contact-form button:hover {
+  background-color: #2e59d9;
+}
+
+/* Comments Section */
+.comments-section {
+  margin-top: 20px;
+}
+
+.comments-section textarea {
+  width: 100%;
+  padding: 10px;
+  border-radius: 5px;
+}
+
+.comments-section button {
+  margin-top: 10px;
+  background-color: #4e73df;
+  color: white;
+  padding: 10px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+/* Footer */
+footer {
+  background-color: #2e59d9;
+  color: white;
+  text-align: center;
+  padding: 10px;
+  margin-top: 20px;
+}
+/* Sidebar Styling */
+.sidebar {
+  flex: 1;
+  background: white;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* Recent Posts Section */
+.recent-posts {
+  margin-bottom: 20px;
+}
+
+.recent-posts h3 {
+  font-size: 20px;
+  border-bottom: 2px solid #4e73df;
+  padding-bottom: 5px;
+  margin-bottom: 10px;
+  color: #4e73df;
+}
+
+.recent-posts ul {
+  list-style: none;
+  padding: 0;
+}
+
+.recent-posts li {
+  padding: 10px;
+  border-bottom: 1px solid #ddd;
+}
+
+.recent-posts li:last-child {
+  border-bottom: none;
+}
+
+.recent-posts a {
+  text-decoration: none;
+  color: #333;
+  font-size: 16px;
+  transition: color 0.3s;
+}
+
+.recent-posts a:hover {
+  color: #4e73df;
+  font-weight: bold;
+}
+
+/* Newsletter Subscription */
+.newsletter {
+  background: #4e73df;
+  color: white;
+  padding: 20px;
+  border-radius: 8px;
+  text-align: center;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.newsletter h3 {
+  font-size: 20px;
+  margin-bottom: 10px;
+}
+
+.newsletter input {
+  width: 90%;
+  padding: 10px;
+  border: none;
+  border-radius: 5px;
+  font-size: 16px;
+  margin: 10px 0;
+}
+
+.newsletter button {
+  background-color: white;
+  color: #4e73df;
+  border: none;
+  padding: 10px;
+  width: 100%;
+  border-radius: 5px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background 0.3s, color 0.3s;
+}
+
+.newsletter button:hover {
+  background-color: #2e59d9;
+  color: white;
+}
+
+/* Dark Mode */
+.dark-mode {
+  background-color: #222;
+  color: white;
+}
+
+.dark-mode .sidebar,
+.dark-mode .post,
+.dark-mode .contact-form {
+  background: #333;
+  color: white;
+}
+.comments-section {
+    background: white;
+    padding: 20px;
+    border-radius: 8px;
+}
+
+.comment {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    border-bottom: 1px solid #ccc;
+}
+
+.comment img {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    margin-right: 10px;
+}

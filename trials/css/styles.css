@@ -1,0 +1,16 @@
+table {
+  background-color: white;
+  text-align: center;
+  word-spacing: normal;
+  padding: 10px;
+  border-radius: 10px;
+  position: inherit;
+}
+
+th {
+  border-radius: inherit;
+  background-color: aqua;
+  border: 100px;
+  border-color: black;
+  padding: auto; 
+}

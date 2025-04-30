@@ -1,0 +1,75 @@
+/* Reset and base styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #f1f4f9;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+}
+
+/* Container */
+.converter-container {
+  background-color: #ffffff;
+  padding: 2rem;
+  border-radius: 12px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+  width: 350px;
+  text-align: center;
+}
+
+/* Heading */
+.converter-container h1 {
+  margin-bottom: 20px;
+  color: #333;
+}
+
+/* Form */
+.converter-form .form-group {
+  margin-bottom: 15px;
+  text-align: left;
+}
+
+.converter-form label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: 600;
+}
+
+.converter-form select,
+.converter-form input {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #bbb;
+  border-radius: 6px;
+  font-size: 1rem;
+}
+
+/* Button */
+#convert-btn {
+  margin-top: 15px;
+  padding: 12px;
+  width: 100%;
+  background-color: #007bff;
+  border: none;
+  border-radius: 6px;
+  color: white;
+  font-size: 1rem;
+  cursor: not-allowed; /* Since there's no JS */
+}
+
+/* Result box */
+.result-box {
+  margin-top: 20px;
+  padding: 15px;
+  background-color: #eef2f5;
+  border-radius: 6px;
+  color: #444;
+  font-size: 1rem;
+}

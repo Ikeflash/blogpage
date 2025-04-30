@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>My Modern Blog</title>
+    <link rel="stylesheet" href="../CSS/styles.css" />
+  </head>
+  <body>
+    <header>
+      <h1>MyBlog</h1>
+      <nav>
+        <ul class="menu">
+          <li>
+            <a href="#">Home</a>
+            <ul class="submenu">
+              <li><a href="#">Latest Posts</a></li>
+              <li><a href="#">Trending Posts</a></li>
+              <li><a href="#">Featured Stories</a></li>
+              <li>
+                <a href="#">Profile</a>
+                <ul class="submenu">
+                  <li><a href="../HTML/Login.htm">Switch Account</a></li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+          <li>
+            <a href="#">Categories</a>
+            <ul class="submenu">
+              <li><a href="#">Technology</a></li>
+              <li><a href="#">Health & Wellness</a></li>
+              <li><a href="#">Lifestyle</a></li>
+              <li><a href="#">Travel</a></li>
+              <li><a href="#">Business</a></li>
+              <li><a href="#">Education</a></li>
+            </ul>
+          </li>
+          <li>
+            <a href="#">About</a>
+            <ul class="submenu">
+              <li><a href="#">Our Story</a></li>
+              <li><a href="#">Meet the Team</a></li>
+              <li><a href="#">Careers</a></li>
+            </ul>
+          </li>
+          <li>
+            <a href="#">Contact</a>
+            <ul class="submenu">
+              <li><a href="#">Email Us</a></li>
+              <li><a href="#">Support Center</a></li>
+              <li><a href="#">FAQs</a></li>
+            </ul>
+          </li>
+        </ul>
+      </nav>
+      <button id="dark-mode-toggle">Dark Mode</button>
+    </header>
+
+    <div class="container">
+      <main>
+        <article class="post">
+          <h2>Spidey</h2>
+          <img src="../Images/Glx6e6FWEAEjiOg.jfif" alt="Spidey Image" />
+          <p>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Distinctio
+            earum impedit praesentium odit at nostrum illo libero quis sunt ea.
+          </p>
+          <a href="#">Read More</a>
+        </article>
+
+        <article class="post">
+          <h2>Alien</h2>
+          <img
+            src="../Images/0f3105e1-acd5-416f-9f6c-b6a1b31c2284.jfif"
+            alt="Alien Image"
+          />
+          <p>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Distinctio
+            earum impedit praesentium odit at nostrum illo libero quis sunt ea.
+          </p>
+          <a href="#">Read More</a>
+        </article>
+
+        <article class="post">
+          <h2>Spiderman</h2>
+          <img src="../Images/kaqfEyv8_400x400.jpg" alt="Spiderman Image" />
+          <p>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Distinctio
+            earum impedit praesentium odit at nostrum illo libero quis sunt ea.
+          </p>
+          <a href="../HTML/empty.htm">Read More</a>
+        </article>
+
+        <section class="comments-section">
+          <h3>Leave a Comment</h3>
+          <textarea placeholder="Write your comment here..."></textarea>
+          <button>Post Comment</button>
+        </section>
+      </main>
+
+      <aside class="sidebar">
+        <h3>Recent Posts</h3>
+        <ul>
+          <li><a href="#">How AI is Changing the World</a></li>
+          <li><a href="#">Top 10 Travel Destinations</a></li>
+          <li><a href="#">Best Coding Practices</a></li>
+        </ul>
+
+        <h3>Subscribe to Our Newsletter</h3>
+        <input type="email" placeholder="Enter your email" />
+        <button>Subscribe</button>
+      </aside>
+    </div>
+
+    <section class="contact-form">
+      <h2>Contact Us</h2>
+      <input type="text" placeholder="Your Name" />
+      <input type="email" placeholder="Your Email" />
+      <textarea placeholder="Your Message"></textarea>
+      <button>Send Message</button>
+    </section>
+    <section class="comments-section">
+      <h3>Leave a Comment</h3>
+      <input type="text" placeholder="Your Name" />
+      <input type="file" accept="image/*" id="avatar" />
+      <textarea placeholder="Write your comment..."></textarea>
+      <button id="post-comment">Post Comment</button>
+      <div id="comments"></div>
+    </section>
+
+    <footer>
+      <p>&copy; 2025 MyBlog. All rights reserved.</p>
+    </footer>
+
+    <script>
+      // Dark Mode Toggle
+      const toggleButton = document.getElementById("dark-mode-toggle");
+      toggleButton.addEventListener("click", () => {
+        document.body.classList.toggle("dark-mode");
+      });
+    </script>
+  </body>
+</html>

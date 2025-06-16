@@ -1,67 +1,115 @@
+/* profiles.css */
 * {
+  box-sizing: border-box;
   margin: 0;
   padding: 0;
-  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
 }
 
 body {
-  font-family: Arial, sans-serif;
-  background: #f0f2f5;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
+  background-color: #f4f6f8;
+  color: #333;
+  line-height: 1.6;
 }
 
-.container {
-  width: 100%;
+/* Navbar Styles */
+.navbar {
+  background-color: #1e1e2f;
+  color: white;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 2rem;
+}
+
+.navbar .logo {
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+.navbar .nav-links {
+  list-style: none;
+  display: flex;
+  gap: 1.5rem;
+}
+
+.navbar .nav-links a {
+  color: white;
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.3s ease;
+}
+
+.navbar .nav-links a:hover {
+  color: #f4b400;
+}
+
+/* Main Container */
+.main-container {
+  display: flex;
+  gap: 2rem;
+  padding: 2rem;
+  flex-wrap: wrap;
+}
+
+/* Profile Section */
+.profile-section {
+  flex: 1;
+  min-width: 280px;
   max-width: 400px;
 }
 
 .profile-card {
-  background: #fff;
-  padding: 30px;
-  border-radius: 10px;
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  background: white;
+  border-radius: 15px;
+  padding: 2rem;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   text-align: center;
 }
 
-.profile-image img {
+.profile-img {
   width: 100px;
   height: 100px;
   border-radius: 50%;
   object-fit: cover;
-  margin-bottom: 15px;
+  margin-bottom: 1rem;
 }
 
 .profile-card h2 {
-  margin-bottom: 10px;
-  color: #333;
+  font-size: 1.5rem;
+  margin-bottom: 0.5rem;
 }
 
 .profile-card p {
-  margin: 8px 0;
-  color: #555;
+  margin: 0.4rem 0;
 }
 
-.buttons {
-  margin-top: 20px;
+.profile-buttons {
+  margin-top: 1.5rem;
   display: flex;
-  flex-direction: column;
-  gap: 10px;
+  justify-content: center;
+  gap: 1rem;
 }
 
-.buttons a {
+.profile-buttons a {
+  background-color: #1e1e2f;
+  color: white;
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
   text-decoration: none;
-  color: #fff;
-  background: #007bff;
-  padding: 10px;
-  border-radius: 5px;
-  transition: background 0.3s;
+  transition: background-color 0.3s ease;
 }
 
-.buttons a:hover {
-  background-color: #0056b3;
-  transform: scale(1.03); /* Slight zoom on hover */
+.profile-buttons a:hover {
+  background-color: #3e3e5e;
 }
 
+/* Dashboard Placeholder Section */
+.dashboard-section {
+  flex: 2;
+  background-color: white;
+  border-radius: 15px;
+  padding: 2rem;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  min-width: 280px;
+}

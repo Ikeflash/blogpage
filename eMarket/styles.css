@@ -1,0 +1,256 @@
+/* Reset and Font */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+body {
+  font-family: "Poppins", sans-serif;
+  background: #fff;
+  color: #333;
+  line-height: 1.6;
+}
+a {
+  text-decoration: none;
+  color: inherit;
+}
+ul {
+  list-style: none;
+}
+
+/* Loader */
+#loader {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  background: #0d1117;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+}
+.spinner {
+  width: 60px;
+  height: 60px;
+  border: 6px solid transparent;
+  border-top: 6px solid #0ff;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+/* Navbar */
+.navbar {
+  background: #0d1117;
+  color: white;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 2rem;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+.logo {
+  font-size: 1.6rem;
+  font-weight: bold;
+}
+.nav-links {
+  display: flex;
+  gap: 1.5rem;
+}
+.nav-links a {
+  color: white;
+  font-weight: 500;
+  transition: color 0.3s;
+}
+.nav-links a:hover {
+  color: #0ff;
+  text-shadow: 0 0 10px #0ff;
+}
+#menu-toggle {
+  display: none;
+  font-size: 2rem;
+  color: #0ff;
+  cursor: pointer;
+}
+
+/* Hero */
+.hero {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  padding: 4rem 2rem;
+  background: #f5f5f5;
+}
+.hero-text {
+  flex: 1;
+  min-width: 280px;
+}
+.hero-text h1 {
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+}
+.hero-text p {
+  margin-bottom: 1.5rem;
+}
+.hero-img {
+  flex: 1;
+  text-align: center;
+}
+.hero-img img {
+  width: 300px;
+  height: 300px;
+  object-fit: cover;
+  border-radius: 50%;
+  border: 4px solid #0ff;
+  box-shadow: 0 0 15px #0ff, 0 0 30px #0ff, 0 0 45px #0ff;
+  transition: transform 0.3s ease, box-shadow 0.4s ease;
+}
+.hero-img img:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 25px #0ff, 0 0 50px #0ff, 0 0 75px #0ff;
+}
+
+/* Buttons */
+.btn {
+  display: inline-block;
+  background: #0d1117;
+  color: white;
+  padding: 0.75rem 1.5rem;
+  border-radius: 25px;
+  transition: all 0.3s ease;
+  animation: glowPulse 2s infinite;
+  box-shadow: 0 0 10px #0ff, 0 0 20px #0ff;
+}
+.btn:hover {
+  background: #0ff;
+  color: #000;
+  box-shadow: 0 0 20px #0ff, 0 0 40px #0ff;
+}
+@keyframes glowPulse {
+  0%,
+  100% {
+    box-shadow: 0 0 10px #0ff, 0 0 20px #0ff;
+  }
+  50% {
+    box-shadow: 0 0 20px #0ff, 0 0 40px #0ff;
+  }
+}
+
+/* General */
+.container {
+  max-width: 1100px;
+  margin: auto;
+  padding: 2rem;
+}
+section {
+  padding: 4rem 2rem;
+  text-align: center;
+}
+
+/* Services */
+.services {
+  background: #f0f0f0;
+}
+.service-grid {
+  display: grid;
+  gap: 2rem;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  margin-top: 2rem;
+}
+.service-card {
+  background: white;
+  padding: 2rem;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s;
+}
+.service-card:hover {
+  transform: translateY(-5px);
+}
+
+/* Products */
+.products {
+  background: #fff;
+}
+.product-grid {
+  display: grid;
+  gap: 2rem;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  margin-top: 2rem;
+}
+.product-card {
+  background: #f9f9f9;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.08);
+  transition: transform 0.3s;
+}
+.product-card:hover {
+  transform: translateY(-5px);
+}
+.product-card img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+}
+.product-info {
+  padding: 1rem;
+}
+.product-info h3 {
+  margin-bottom: 0.5rem;
+}
+.product-info .price {
+  font-size: 1.1rem;
+  font-weight: bold;
+  color: #0d1117;
+}
+
+/* Contact */
+.contact {
+  background: #f5f5f5;
+}
+.contact p {
+  margin-bottom: 1.5rem;
+}
+
+/* Footer */
+.footer {
+  background: #0d1117;
+  color: white;
+  text-align: center;
+  padding: 1rem;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  #menu-toggle {
+    display: block;
+  }
+  .nav-links {
+    display: none;
+    flex-direction: column;
+    background: #0d1117;
+    padding: 1rem;
+    width: 100%;
+    position: absolute;
+    top: 70px;
+    left: 0;
+  }
+  .nav-links.active {
+    display: flex;
+  }
+  .hero {
+    flex-direction: column;
+    text-align: center;
+  }
+}

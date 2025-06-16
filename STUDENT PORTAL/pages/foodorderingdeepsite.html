@@ -1,0 +1,791 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>FoodEase - Online Food Ordering</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap");
+
+      body {
+        font-family: "Poppins", sans-serif;
+        background-color: #f8f9fa;
+      }
+
+      .food-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+      }
+
+      .food-card {
+        transition: all 0.3s ease;
+      }
+
+      .category-btn.active {
+        background-color: #f97316;
+        color: white;
+      }
+
+      .cart-item {
+        transition: all 0.2s ease;
+      }
+
+      .cart-item:hover {
+        background-color: #f8f9fa;
+      }
+
+      /* Animation for cart notification */
+      @keyframes pulse {
+        0% {
+          transform: scale(1);
+        }
+        50% {
+          transform: scale(1.1);
+        }
+        100% {
+          transform: scale(1);
+        }
+      }
+
+      .pulse {
+        animation: pulse 0.5s infinite;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Header/Navigation -->
+    <header class="bg-white shadow-sm sticky top-0 z-50">
+      <div
+        class="container mx-auto px-4 py-3 flex justify-between items-center"
+      >
+        <div class="flex items-center">
+          <i class="fas fa-utensils text-orange-500 text-2xl mr-2"></i>
+          <h1 class="text-xl font-bold text-gray-800">
+            Food<span class="text-orange-500">Ease</span>
+          </h1>
+        </div>
+
+        <div class="hidden md:flex space-x-6">
+          <a href="#" class="text-gray-800 hover:text-orange-500">Home</a>
+          <a href="#" class="text-gray-800 hover:text-orange-500">Menu</a>
+          <a href="#" class="text-gray-800 hover:text-orange-500">About</a>
+          <a href="#" class="text-gray-800 hover:text-orange-500">Contact</a>
+        </div>
+
+        <div class="flex items-center space-x-4">
+          <div class="relative">
+            <button
+              id="cartBtn"
+              class="text-gray-800 hover:text-orange-500 relative"
+            >
+              <i class="fas fa-shopping-cart text-xl"></i>
+              <span
+                id="cartCount"
+                class="absolute -top-2 -right-2 bg-orange-500 text-white text-xs rounded-full h-5 w-5 flex items-center justify-center hidden"
+                >0</span
+              >
+            </button>
+          </div>
+          <button class="md:hidden text-gray-800" id="mobileMenuBtn">
+            <i class="fas fa-bars text-xl"></i>
+          </button>
+          <button
+            class="hidden md:block bg-orange-500 text-white px-4 py-2 rounded-full hover:bg-orange-600 transition"
+          >
+            Sign In
+          </button>
+        </div>
+      </div>
+
+      <!-- Mobile Menu -->
+      <div
+        id="mobileMenu"
+        class="hidden md:hidden bg-white py-2 px-4 shadow-md"
+      >
+        <a href="#" class="block py-2 text-gray-800 hover:text-orange-500"
+          >Home</a
+        >
+        <a href="#" class="block py-2 text-gray-800 hover:text-orange-500"
+          >Menu</a
+        >
+        <a href="#" class="block py-2 text-gray-800 hover:text-orange-500"
+          >About</a
+        >
+        <a href="#" class="block py-2 text-gray-800 hover:text-orange-500"
+          >Contact</a
+        >
+        <button
+          class="w-full bg-orange-500 text-white px-4 py-2 rounded-full hover:bg-orange-600 transition mt-2"
+        >
+          Sign In
+        </button>
+      </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="bg-gradient-to-r from-orange-50 to-amber-50 py-12">
+      <div
+        class="container mx-auto px-4 flex flex-col md:flex-row items-center"
+      >
+        <div class="md:w-1/2 mb-8 md:mb-0">
+          <h1 class="text-4xl md:text-5xl font-bold text-gray-800 mb-4">
+            Delicious Food Delivered To Your Door
+          </h1>
+          <p class="text-gray-600 mb-6">
+            Order from your favorite restaurants with just a few clicks and
+            enjoy a quick delivery.
+          </p>
+          <div class="flex flex-col sm:flex-row gap-3">
+            <button
+              class="bg-orange-500 text-white px-6 py-3 rounded-full hover:bg-orange-600 transition flex items-center justify-center"
+            >
+              <i class="fas fa-bolt mr-2"></i> Order Now
+            </button>
+            <button
+              class="border border-orange-500 text-orange-500 px-6 py-3 rounded-full hover:bg-orange-50 transition flex items-center justify-center"
+            >
+              <i class="fas fa-utensils mr-2"></i> View Menu
+            </button>
+          </div>
+        </div>
+        <div class="md:w-1/2 flex justify-center">
+          <img
+            src="https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80"
+            alt="Delicious Food"
+            class="rounded-lg shadow-lg w-full max-w-md"
+          />
+        </div>
+      </div>
+    </section>
+
+    <!-- Food Categories -->
+    <section class="py-12 bg-white">
+      <div class="container mx-auto px-4">
+        <h2 class="text-3xl font-bold text-center text-gray-800 mb-8">
+          Our Menu Categories
+        </h2>
+
+        <div class="flex overflow-x-auto pb-4 mb-8 hide-scrollbar space-x-2">
+          <button
+            class="category-btn active px-6 py-2 rounded-full border border-gray-200 whitespace-nowrap"
+            data-category="all"
+          >
+            All Items
+          </button>
+          <button
+            class="category-btn px-6 py-2 rounded-full border border-gray-200 whitespace-nowrap"
+            data-category="pizza"
+          >
+            <i class="fas fa-pizza-slice mr-2"></i> Pizza
+          </button>
+          <button
+            class="category-btn px-6 py-2 rounded-full border border-gray-200 whitespace-nowrap"
+            data-category="burger"
+          >
+            <i class="fas fa-hamburger mr-2"></i> Burgers
+          </button>
+          <button
+            class="category-btn px-6 py-2 rounded-full border border-gray-200 whitespace-nowrap"
+            data-category="pasta"
+          >
+            <i class="fas fa-utensils mr-2"></i> Pasta
+          </button>
+          <button
+            class="category-btn px-6 py-2 rounded-full border border-gray-200 whitespace-nowrap"
+            data-category="salad"
+          >
+            <i class="fas fa-leaf mr-2"></i> Salads
+          </button>
+          <button
+            class="category-btn px-6 py-2 rounded-full border border-gray-200 whitespace-nowrap"
+            data-category="dessert"
+          >
+            <i class="fas fa-ice-cream mr-2"></i> Desserts
+          </button>
+          <button
+            class="category-btn px-6 py-2 rounded-full border border-gray-200 whitespace-nowrap"
+            data-category="drink"
+          >
+            <i class="fas fa-glass-whiskey mr-2"></i> Drinks
+          </button>
+        </div>
+
+        <!-- Food Items Grid -->
+        <div
+          class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6"
+          id="foodGrid"
+        >
+          <!-- Food items will be dynamically inserted here -->
+        </div>
+      </div>
+    </section>
+
+    <!-- How It Works -->
+    <section class="py-12 bg-gray-50">
+      <div class="container mx-auto px-4">
+        <h2 class="text-3xl font-bold text-center text-gray-800 mb-12">
+          How It Works
+        </h2>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <div
+            class="text-center p-6 bg-white rounded-lg shadow-sm hover:shadow-md transition"
+          >
+            <div
+              class="bg-orange-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4"
+            >
+              <i class="fas fa-search text-orange-500 text-2xl"></i>
+            </div>
+            <h3 class="text-xl font-semibold mb-2">Browse Menu</h3>
+            <p class="text-gray-600">
+              Explore our diverse menu and select your favorite dishes.
+            </p>
+          </div>
+
+          <div
+            class="text-center p-6 bg-white rounded-lg shadow-sm hover:shadow-md transition"
+          >
+            <div
+              class="bg-orange-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4"
+            >
+              <i class="fas fa-shopping-cart text-orange-500 text-2xl"></i>
+            </div>
+            <h3 class="text-xl font-semibold mb-2">Add to Cart</h3>
+            <p class="text-gray-600">
+              Customize your order and add items to your cart.
+            </p>
+          </div>
+
+          <div
+            class="text-center p-6 bg-white rounded-lg shadow-sm hover:shadow-md transition"
+          >
+            <div
+              class="bg-orange-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4"
+            >
+              <i class="fas fa-truck text-orange-500 text-2xl"></i>
+            </div>
+            <h3 class="text-xl font-semibold mb-2">Fast Delivery</h3>
+            <p class="text-gray-600">
+              Enjoy your meal delivered to your doorstep in no time.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Cart Sidebar -->
+    <div
+      id="cartSidebar"
+      class="fixed top-0 right-0 w-full md:w-96 h-full bg-white shadow-lg transform translate-x-full transition-transform duration-300 z-50 overflow-y-auto"
+    >
+      <div class="p-6">
+        <div class="flex justify-between items-center mb-6">
+          <h2 class="text-2xl font-bold text-gray-800">Your Order</h2>
+          <button id="closeCartBtn" class="text-gray-500 hover:text-gray-700">
+            <i class="fas fa-times text-xl"></i>
+          </button>
+        </div>
+
+        <div id="cartItems" class="mb-6">
+          <!-- Cart items will be dynamically inserted here -->
+          <div class="text-center py-10 text-gray-500" id="emptyCartMessage">
+            <i class="fas fa-shopping-cart text-4xl mb-3"></i>
+            <p>Your cart is empty</p>
+          </div>
+        </div>
+
+        <div class="border-t border-gray-200 pt-4 mb-4">
+          <div class="flex justify-between mb-2">
+            <span class="text-gray-600">Subtotal:</span>
+            <span class="font-medium" id="subtotal">$0.00</span>
+          </div>
+          <div class="flex justify-between mb-2">
+            <span class="text-gray-600">Delivery Fee:</span>
+            <span class="font-medium" id="deliveryFee">$2.99</span>
+          </div>
+          <div class="flex justify-between text-lg font-bold">
+            <span>Total:</span>
+            <span id="total">$2.99</span>
+          </div>
+        </div>
+
+        <button
+          id="checkoutBtn"
+          class="w-full bg-orange-500 text-white py-3 rounded-lg hover:bg-orange-600 transition flex items-center justify-center disabled:opacity-50"
+          disabled
+        >
+          <i class="fas fa-credit-card mr-2"></i> Proceed to Checkout
+        </button>
+      </div>
+    </div>
+    <div
+      id="cartOverlay"
+      class="fixed inset-0 bg-black bg-opacity-50 z-40 hidden"
+    ></div>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white py-12">
+      <div class="container mx-auto px-4">
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+          <div>
+            <div class="flex items-center mb-4">
+              <i class="fas fa-utensils text-orange-500 text-2xl mr-2"></i>
+              <h3 class="text-xl font-bold">
+                Food<span class="text-orange-500">Ease</span>
+              </h3>
+            </div>
+            <p class="text-gray-400 mb-4">
+              Delivering delicious meals to your doorstep since 2023.
+            </p>
+            <div class="flex space-x-4">
+              <a href="#" class="text-gray-400 hover:text-white"
+                ><i class="fab fa-facebook-f"></i
+              ></a>
+              <a href="#" class="text-gray-400 hover:text-white"
+                ><i class="fab fa-twitter"></i
+              ></a>
+              <a href="#" class="text-gray-400 hover:text-white"
+                ><i class="fab fa-instagram"></i
+              ></a>
+              <a href="#" class="text-gray-400 hover:text-white"
+                ><i class="fab fa-linkedin-in"></i
+              ></a>
+            </div>
+          </div>
+
+          <div>
+            <h4 class="text-lg font-semibold mb-4">Quick Links</h4>
+            <ul class="space-y-2">
+              <li>
+                <a href="#" class="text-gray-400 hover:text-white">Home</a>
+              </li>
+              <li>
+                <a href="#" class="text-gray-400 hover:text-white">About Us</a>
+              </li>
+              <li>
+                <a href="#" class="text-gray-400 hover:text-white">Menu</a>
+              </li>
+              <li>
+                <a href="#" class="text-gray-400 hover:text-white">Contact</a>
+              </li>
+            </ul>
+          </div>
+
+          <div>
+            <h4 class="text-lg font-semibold mb-4">Support</h4>
+            <ul class="space-y-2">
+              <li>
+                <a href="#" class="text-gray-400 hover:text-white">FAQ</a>
+              </li>
+              <li>
+                <a href="#" class="text-gray-400 hover:text-white"
+                  >Privacy Policy</a
+                >
+              </li>
+              <li>
+                <a href="#" class="text-gray-400 hover:text-white"
+                  >Terms & Conditions</a
+                >
+              </li>
+              <li>
+                <a href="#" class="text-gray-400 hover:text-white"
+                  >Shipping Policy</a
+                >
+              </li>
+            </ul>
+          </div>
+
+          <div>
+            <h4 class="text-lg font-semibold mb-4">Contact Us</h4>
+            <ul class="space-y-2">
+              <li class="flex items-center text-gray-400">
+                <i class="fas fa-map-marker-alt mr-2"></i> 123 Food Street, City
+              </li>
+              <li class="flex items-center text-gray-400">
+                <i class="fas fa-phone-alt mr-2"></i> (123) 456-7890
+              </li>
+              <li class="flex items-center text-gray-400">
+                <i class="fas fa-envelope mr-2"></i> info@foodease.com
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <div
+          class="border-t border-gray-700 mt-8 pt-8 text-center text-gray-400"
+        >
+          <p>&copy; 2023 FoodEase. All rights reserved.</p>
+        </div>
+      </div>
+    </footer>
+
+    <script>
+      // Sample food data
+      const foodItems = [
+        {
+          id: 1,
+          name: "Margherita Pizza",
+          description: "Classic pizza with tomato sauce, mozzarella, and basil",
+          price: 12.99,
+          category: "pizza",
+          image:
+            "https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80",
+        },
+        {
+          id: 2,
+          name: "Pepperoni Pizza",
+          description:
+            "Classic pizza with tomato sauce, mozzarella, and pepperoni",
+          price: 14.99,
+          category: "pizza",
+          image:
+            "https://images.unsplash.com/photo-1628840042765-356cda07504e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80",
+        },
+        {
+          id: 3,
+          name: "Classic Burger",
+          description:
+            "Beef patty with lettuce, tomato, onion, and special sauce",
+          price: 9.99,
+          category: "burger",
+          image:
+            "https://images.unsplash.com/photo-1568901346375-23c9450c58cd?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80",
+        },
+        {
+          id: 4,
+          name: "Cheeseburger",
+          description: "Classic burger with American cheese",
+          price: 10.99,
+          category: "burger",
+          image:
+            "https://images.unsplash.com/photo-1571091718767-18b5b1457add?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80",
+        },
+        {
+          id: 5,
+          name: "Spaghetti Carbonara",
+          description: "Pasta with creamy egg sauce, pancetta, and parmesan",
+          price: 11.99,
+          category: "pasta",
+          image:
+            "https://images.unsplash.com/photo-1611270634121-0b7ddf0a56a0?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80",
+        },
+        {
+          id: 6,
+          name: "Caesar Salad",
+          description:
+            "Romaine lettuce with Caesar dressing, croutons, and parmesan",
+          price: 8.99,
+          category: "salad",
+          image:
+            "https://images.unsplash.com/photo-1546793665-c74683f339c1?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80",
+        },
+        {
+          id: 7,
+          name: "Chocolate Lava Cake",
+          description:
+            "Warm chocolate cake with a molten center, served with ice cream",
+          price: 6.99,
+          category: "dessert",
+          image:
+            "https://images.unsplash.com/photo-1563805042-7684c019e1cb?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80",
+        },
+        {
+          id: 8,
+          name: "Iced Coffee",
+          description: "Chilled coffee with milk and sweetener",
+          price: 3.99,
+          category: "drink",
+          image:
+            "https://images.unsplash.com/photo-1517701550927-30cf4ba1dba5?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80",
+        },
+      ];
+
+      // Cart functionality
+      let cart = [];
+
+      // DOM elements
+      const foodGrid = document.getElementById("foodGrid");
+      const cartBtn = document.getElementById("cartBtn");
+      const closeCartBtn = document.getElementById("closeCartBtn");
+      const cartSidebar = document.getElementById("cartSidebar");
+      const cartOverlay = document.getElementById("cartOverlay");
+      const cartItems = document.getElementById("cartItems");
+      const emptyCartMessage = document.getElementById("emptyCartMessage");
+      const subtotalElement = document.getElementById("subtotal");
+      const totalElement = document.getElementById("total");
+      const checkoutBtn = document.getElementById("checkoutBtn");
+      const cartCount = document.getElementById("cartCount");
+      const categoryBtns = document.querySelectorAll(".category-btn");
+      const mobileMenuBtn = document.getElementById("mobileMenuBtn");
+      const mobileMenu = document.getElementById("mobileMenu");
+
+      // Initialize the app
+      function init() {
+        renderFoodItems();
+        setupEventListeners();
+      }
+
+      // Render food items
+      function renderFoodItems(category = "all") {
+        foodGrid.innerHTML = "";
+
+        const filteredItems =
+          category === "all"
+            ? foodItems
+            : foodItems.filter((item) => item.category === category);
+
+        if (filteredItems.length === 0) {
+          foodGrid.innerHTML =
+            '<p class="col-span-full text-center text-gray-500 py-10">No items found in this category</p>';
+          return;
+        }
+
+        filteredItems.forEach((item) => {
+          const foodCard = document.createElement("div");
+          foodCard.className =
+            "food-card bg-white rounded-lg overflow-hidden shadow-sm hover:shadow-md";
+          foodCard.innerHTML = `
+                    <img src="${item.image}" alt="${
+            item.name
+          }" class="w-full h-48 object-cover">
+                    <div class="p-4">
+                        <div class="flex justify-between items-start mb-2">
+                            <h3 class="font-bold text-lg">${item.name}</h3>
+                            <span class="font-bold text-orange-500">$${item.price.toFixed(
+                              2
+                            )}</span>
+                        </div>
+                        <p class="text-gray-600 text-sm mb-4">${
+                          item.description
+                        }</p>
+                        <button class="add-to-cart-btn w-full bg-orange-500 text-white py-2 rounded-lg hover:bg-orange-600 transition" 
+                                data-id="${item.id}">
+                            <i class="fas fa-plus mr-1"></i> Add to Cart
+                        </button>
+                    </div>
+                `;
+          foodGrid.appendChild(foodCard);
+        });
+
+        // Add event listeners to the new buttons
+        document.querySelectorAll(".add-to-cart-btn").forEach((btn) => {
+          btn.addEventListener("click", addToCart);
+        });
+      }
+
+      // Add item to cart
+      function addToCart(e) {
+        const id = parseInt(e.target.getAttribute("data-id"));
+        const item = foodItems.find((item) => item.id === id);
+
+        // Check if item already exists in cart
+        const existingItem = cart.find((cartItem) => cartItem.id === id);
+
+        if (existingItem) {
+          existingItem.quantity += 1;
+        } else {
+          cart.push({
+            ...item,
+            quantity: 1,
+          });
+        }
+
+        updateCart();
+
+        // Show cart count with animation
+        cartCount.textContent = getCartCount();
+        cartCount.classList.remove("hidden");
+        cartCount.classList.add("pulse");
+
+        // Remove animation after it's done
+        setTimeout(() => {
+          cartCount.classList.remove("pulse");
+        }, 500);
+      }
+
+      // Remove item from cart
+      function removeFromCart(id) {
+        cart = cart.filter((item) => item.id !== id);
+        updateCart();
+      }
+
+      // Update quantity of item in cart
+      function updateQuantity(id, newQuantity) {
+        const item = cart.find((item) => item.id === id);
+        if (item) {
+          item.quantity = newQuantity;
+          if (item.quantity <= 0) {
+            removeFromCart(id);
+          } else {
+            updateCart();
+          }
+        }
+      }
+
+      // Update cart UI
+      function updateCart() {
+        // Update cart items list
+        if (cart.length === 0) {
+          emptyCartMessage.classList.remove("hidden");
+          cartItems.innerHTML = "";
+          cartItems.appendChild(emptyCartMessage);
+          checkoutBtn.disabled = true;
+        } else {
+          emptyCartMessage.classList.add("hidden");
+
+          let itemsHTML = "";
+          let subtotal = 0;
+
+          cart.forEach((item) => {
+            subtotal += item.price * item.quantity;
+
+            itemsHTML += `
+                        <div class="cart-item flex items-center justify-between py-4 border-b border-gray-100">
+                            <div class="flex items-center">
+                                <img src="${item.image}" alt="${
+              item.name
+            }" class="w-12 h-12 rounded object-cover mr-3">
+                                <div>
+                                    <h4 class="font-medium">${item.name}</h4>
+                                    <p class="text-sm text-gray-500">$${item.price.toFixed(
+                                      2
+                                    )}</p>
+                                </div>
+                            </div>
+                            <div class="flex items-center">
+                                <button class="decrease-btn px-2 text-gray-500 hover:text-orange-500" data-id="${
+                                  item.id
+                                }">
+                                    <i class="fas fa-minus"></i>
+                                </button>
+                                <span class="quantity mx-2 w-8 text-center">${
+                                  item.quantity
+                                }</span>
+                                <button class="increase-btn px-2 text-gray-500 hover:text-orange-500" data-id="${
+                                  item.id
+                                }">
+                                    <i class="fas fa-plus"></i>
+                                </button>
+                                <button class="remove-btn ml-3 text-red-500 hover:text-red-700" data-id="${
+                                  item.id
+                                }">
+                                    <i class="fas fa-trash"></i>
+                                </button>
+                            </div>
+                        </div>
+                    `;
+          });
+
+          cartItems.innerHTML = itemsHTML;
+          checkoutBtn.disabled = false;
+
+          // Add event listeners to the new buttons
+          document.querySelectorAll(".decrease-btn").forEach((btn) => {
+            btn.addEventListener("click", (e) => {
+              const id = parseInt(
+                e.target.closest("button").getAttribute("data-id")
+              );
+              const item = cart.find((item) => item.id === id);
+              if (item) {
+                updateQuantity(id, item.quantity - 1);
+              }
+            });
+          });
+
+          document.querySelectorAll(".increase-btn").forEach((btn) => {
+            btn.addEventListener("click", (e) => {
+              const id = parseInt(
+                e.target.closest("button").getAttribute("data-id")
+              );
+              const item = cart.find((item) => item.id === id);
+              if (item) {
+                updateQuantity(id, item.quantity + 1);
+              }
+            });
+          });
+
+          document.querySelectorAll(".remove-btn").forEach((btn) => {
+            btn.addEventListener("click", (e) => {
+              const id = parseInt(
+                e.target.closest("button").getAttribute("data-id")
+              );
+              removeFromCart(id);
+            });
+          });
+        }
+
+        // Update totals
+        const deliveryFee = 2.99;
+        const total = subtotal + deliveryFee;
+
+        subtotalElement.textContent = `$${subtotal.toFixed(2)}`;
+        totalElement.textContent = `$${total.toFixed(2)}`;
+
+        // Update cart count
+        const count = getCartCount();
+        cartCount.textContent = count;
+        if (count === 0) {
+          cartCount.classList.add("hidden");
+        } else {
+          cartCount.classList.remove("hidden");
+        }
+      }
+
+      // Get total number of items in cart
+      function getCartCount() {
+        return cart.reduce((total, item) => total + item.quantity, 0);
+      }
+
+      // Setup event listeners
+      function setupEventListeners() {
+        // Cart toggle
+        cartBtn.addEventListener("click", () => {
+          cartSidebar.classList.remove("translate-x-full");
+          cartOverlay.classList.remove("hidden");
+          document.body.style.overflow = "hidden";
+        });
+
+        closeCartBtn.addEventListener("click", closeCart);
+        cartOverlay.addEventListener("click", closeCart);
+
+        // Category filter
+        categoryBtns.forEach((btn) => {
+          btn.addEventListener("click", () => {
+            categoryBtns.forEach((b) => b.classList.remove("active"));
+            btn.classList.add("active");
+            const category = btn.getAttribute("data-category");
+            renderFoodItems(category);
+          });
+        });
+
+        // Checkout button
+        checkoutBtn.addEventListener("click", () => {
+          alert(
+            "Proceeding to checkout! This would normally redirect to a checkout page."
+          );
+          closeCart();
+        });
+
+        // Mobile menu toggle
+        mobileMenuBtn.addEventListener("click", () => {
+          mobileMenu.classList.toggle("hidden");
+        });
+      }
+
+      // Close cart
+      function closeCart() {
+        cartSidebar.classList.add("translate-x-full");
+        cartOverlay.classList.add("hidden");
+        document.body.style.overflow = "auto";
+      }
+
+      // Initialize the app
+      document.addEventListener("DOMContentLoaded", init);
+    </script>
+  </body>
+</html>

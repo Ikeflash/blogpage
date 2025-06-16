@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Edit Profile</title>
+    <link rel="stylesheet" href="../css/styles.css" />
+    <style>
+      body {
+        font-family: "Poppins", sans-serif;
+        padding: 2rem;
+        background-color: #f5f5f5;
+      }
+
+      .edit-form {
+        max-width: 500px;
+        margin: 0 auto;
+        background: white;
+        padding: 2rem;
+        border-radius: 10px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+      }
+
+      .edit-form h2 {
+        text-align: center;
+        margin-bottom: 1.5rem;
+      }
+
+      .form-group {
+        margin-bottom: 1rem;
+      }
+
+      .form-group label {
+        display: block;
+        margin-bottom: 0.5rem;
+        font-weight: 600;
+      }
+
+      .form-group input,
+      .form-group textarea {
+        width: 100%;
+        padding: 0.6rem;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+      }
+
+      button {
+        display: block;
+        width: 100%;
+        padding: 0.8rem;
+        background-color: #007bff;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        font-size: 1rem;
+        cursor: pointer;
+        margin-top: 1rem;
+      }
+
+      button:hover {
+        background-color: #0056b3;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="edit-form">
+      <h2>Edit Profile</h2>
+      <form id="editProfileForm">
+        <div class="form-group">
+          <label for="age">Age</label>
+          <input type="number" id="age" name="age" required />
+        </div>
+        <div class="form-group">
+          <label for="level">Level</label>
+          <input type="text" id="level" name="level" required />
+        </div>
+        <div class="form-group">
+          <label for="skills">Skills</label>
+          <textarea id="skills" name="skills" rows="3" required></textarea>
+        </div>
+        <div class="form-group">
+          <label for="photo">Upload Profile Image</label>
+          <input type="file" id="photo" name="photo" accept="image/*" />
+        </div>
+        <button type="submit">Save Changes</button>
+      </form>
+    </div>
+
+    <script>
+      const student = JSON.parse(localStorage.getItem("studentData"));
+      if (!student) {
+        alert("Please register first.");
+        window.location.href = "register.html";
+      }
+
+      const form = document.getElementById("editProfileForm");
+      const ageInput = document.getElementById("age");
+      const levelInput = document.getElementById("level");
+      const skillsInput = document.getElementById("skills");
+      const photoInput = document.getElementById("photo");
+
+      // Pre-fill fields with existing data
+      ageInput.value = student.age || "";
+      levelInput.value = student.level || "";
+      skillsInput.value = student.skills || "";
+
+      form.addEventListener("submit", (e) => {
+        e.preventDefault();
+
+        student.age = ageInput.value;
+        student.level = levelInput.value;
+        student.skills = skillsInput.value;
+
+        const file = photoInput.files[0];
+        if (file) {
+          const reader = new FileReader();
+          reader.onload = () => {
+            student.photo = reader.result;
+            localStorage.setItem("studentData", JSON.stringify(student));
+            alert("Profile updated successfully!");
+            window.location.href = "dashboard.html";
+          };
+          reader.readAsDataURL(file);
+        } else {
+          localStorage.setItem("studentData", JSON.stringify(student));
+          alert("Profile updated successfully!");
+          window.location.href = "dashboard.html";
+        }
+      });
+    </script>
+  </body>
+</html>

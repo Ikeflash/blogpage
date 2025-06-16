@@ -1,4 +1,6 @@
-/* Reset default browser styles */
+/* Google Font */
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap");
+
 * {
   margin: 0;
   padding: 0;
@@ -6,88 +8,199 @@
 }
 
 body {
-  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  font-family: "Poppins", sans-serif;
   background-color: #f4f6f8;
   color: #333;
+  padding: 1rem;
+}
+
+/* Utility Container */
+.container {
+  max-width: 600px;
+  margin: 2rem auto;
+  background-color: #fff;
+  padding: 2rem;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.05);
+}
+
+/* Header / Titles */
+h1,
+h2,
+h3 {
+  margin-bottom: 1rem;
+  color: #222;
+  font-size: 1.5rem;
+  text-align: center;
+}
+
+/* Form Styles */
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+label {
+  font-weight: 600;
+  font-size: 0.95rem;
+}
+
+input,
+select,
+textarea {
+  padding: 0.6rem;
+  font-size: 0.9rem;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  width: 100%;
+}
+
+textarea {
+  resize: vertical;
+  min-height: 80px;
+}
+
+/* File Upload Input */
+input[type="file"] {
+  padding: 0.4rem;
+  background-color: #f9f9f9;
+  border: 1px dashed #aaa;
+}
+
+/* Button */
+button {
+  background-color: #007bff;
+  color: #fff;
+  padding: 0.7rem;
+  border: none;
+  border-radius: 5px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+button:hover {
+  background-color: #0056b3;
+}
+
+/* Navigation */
+nav {
+  background-color: #007bff;
+  color: white;
+  padding: 0.8rem 1.2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-radius: 6px;
+  margin-bottom: 2rem;
+}
+
+nav .logo {
+  font-weight: bold;
+  font-size: 1.1rem;
+}
+
+.nav-links {
+  list-style: none;
+  display: flex;
+  gap: 1.2rem;
+}
+
+.nav-links a {
+  color: white;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.nav-links a:hover {
+  text-decoration: underline;
+}
+
+/* Profile Card */
+.profile-card {
+  background: #ffffff;
+  padding: 1.5rem;
+  text-align: center;
+  border-radius: 8px;
+  box-shadow: 0 0 8px rgba(0, 0, 0, 0.05);
+}
+
+.profile-card img {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-bottom: 1rem;
+}
+
+.profile-buttons {
+  margin-top: 1rem;
   display: flex;
   justify-content: center;
-  align-items: center;
-  height: 100vh;
+  gap: 1rem;
 }
 
-.registration-form {
-  background-color: #fff;
-  padding: 30px 40px;
-  border-radius: 12px;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-  width: 100%;
-  max-width: 400px;
-}
-.registration-form button {
-  /* existing styles */
-  transition: background-color 0.3s ease, transform 0.2s ease;
-}
-
-.registration-form button:hover {
-  background-color: #0056b3;
-  transform: scale(1.03); /* Slight zoom on hover */
-}
-
-.registration-form h2 {
-  text-align: center;
-  margin-bottom: 25px;
-  color: #2c3e50;
-}
-
-.registration-form label {
-  display: block;
-  margin-top: 15px;
-  margin-bottom: 5px;
-  font-weight: 600;
-}
-
-.registration-form input {
-  width: 100%;
-  padding: 10px;
-  border: 1px solid #ccc;
-  border-radius: 6px;
-  font-size: 14px;
-  transition: border 0.3s ease;
-}
-
-.registration-form input:focus {
-  border-color: #007bff;
-  outline: none;
-}
-
-.registration-form button {
-  width: 100%;
-  margin-top: 20px;
-  padding: 12px;
+.profile-buttons a {
+  padding: 0.5rem 1rem;
   background-color: #007bff;
-  border: none;
-  border-radius: 6px;
   color: white;
-  font-size: 16px;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
+  border-radius: 5px;
+  text-decoration: none;
+  font-size: 0.9rem;
 }
 
-.registration-form button:hover {
+.profile-buttons a:hover {
   background-color: #0056b3;
 }
 
-.registration-form p {
+/* Dashboard / Pie Chart */
+.dashboard-section {
+  margin-top: 2rem;
   text-align: center;
-  margin-top: 15px;
-  font-size: 14px;
 }
 
-.registration-form a {
-  color: #007bff;
-  text-decoration: none;
+.pie-chart-box {
+  margin-top: 1rem;
 }
 
-.registration-form a:hover {
-  text-decoration: underline;
+.pie-chart {
+  width: 120px;
+  height: 120px;
+}
+
+.circle-bg {
+  fill: none;
+  stroke: #eee;
+  stroke-width: 3.8;
+}
+
+.circle {
+  fill: none;
+  stroke: #007bff;
+  stroke-width: 3.8;
+  stroke-linecap: round;
+}
+
+.percentage {
+  fill: #333;
+  font-size: 0.5rem;
+  text-anchor: middle;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .nav-links {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .container {
+    margin: 1rem auto;
+    padding: 1.5rem;
+  }
+
+  .dashboard-section {
+    padding: 1rem 0;
+  }
 }

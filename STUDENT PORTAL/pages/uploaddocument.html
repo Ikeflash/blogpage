@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Upload Documents</title>
+    <link rel="stylesheet" href="../css/styles.css" />
+  </head>
+  <body>
+    <section class="upload-form">
+      <h2>Upload Student Documents</h2>
+      <form id="uploadForm">
+        <label for="age">Age:</label>
+        <input type="number" id="age" name="age" required />
+
+        <label for="level">Level:</label>
+        <input type="text" id="level" name="level" placeholder="e.g., 200L" required />
+
+        <label for="skills">Skills:</label>
+        <input type="text" id="skills" name="skills" placeholder="e.g., Web Development" required />
+
+        <label for="photo">Profile Photo:</label>
+        <input type="file" id="photo" name="photo" accept="image/*" required />
+
+        <button type="submit">Submit Documents</button>
+      </form>
+    </section>
+
+    <script>
+      const studentData = JSON.parse(localStorage.getItem("studentData"));
+      if (!studentData) {
+        alert("No student data found. Please register.");
+        window.location.href = "register.html";
+      }
+
+      const form = document.getElementById("uploadForm");
+
+      form.addEventListener("submit", function (e) {
+        e.preventDefault();
+
+        const age = document.getElementById("age").value;
+        const level = document.getElementById("level").value;
+        const skills = document.getElementById("skills").value;
+        const photoInput = document.getElementById("photo");
+
+        const reader = new FileReader();
+        reader.onload = function () {
+          const imageData = reader.result;
+
+          const updatedData = {
+            ...studentData,
+            age: age,
+            level: level,
+            skills: skills,
+            photo: imageData,
+            documents: 3  // assuming all required fields complete the upload
+          };
+
+          localStorage.setItem("studentData", JSON.stringify(updatedData));
+          alert("Documents uploaded successfully!");
+          window.location.href = "dashboard.html";
+        };
+
+        if (photoInput.files.length > 0) {
+          reader.readAsDataURL(photoInput.files[0]);
+        } else {
+          alert("Please select a photo.");
+        }
+      });
+    </script>
+  </body>
+</html>
